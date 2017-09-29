@@ -1,0 +1,139 @@
+public class Driver {
+
+    public static void main(String[] args) {
+
+        // Evolution loop status
+        boolean running = true;
+
+        // Input from user. Either enter to continue or 'q' to quit out
+        int input = ' ';
+
+        // Dimensions of a 3x3 visible grid
+        int rows = 7;
+        int columns = 9;
+
+        // A 3x3 visible grid with a
+        // 23x23 full grid
+        CellGrid grid = new CellGrid(rows, columns);
+
+        grid.setVisibleGrid(getSpaceship());
+
+        System.out.println(grid.getFullGridString());
+
+        // While evolving
+        while(running){
+
+            // Block for input
+            try{ Thread.sleep(250); } catch(Exception ex){System.err.println("thread error");}
+
+            clearScreen();
+            grid.evolve();
+            System.out.println(grid.getFullGridString());
+            if(grid.filledCellOnBorder())
+                grid.clearBorder();
+
+            if(grid.empty())
+                grid.setVisibleGrid(getSpaceship());
+        }//end while
+
+    }//end main
+
+    public static void clearScreen(){
+        for(int i = 0; i < 30; i++)
+            System.out.println();
+    }
+
+    public static int[][] getSampleGrid(){
+        // 3x3 Blinker
+        int[][] sample1 = {
+                {0,1,0},
+                {0,1,0},
+                {0,1,0}
+        };
+
+        // 3x3 Glider
+        int[][] sample2 = {
+                {1,0,0},
+                {0,1,1},
+                {1,1,0}
+        };
+
+        // 5x5 Pattern
+        int[][] sample3 = {
+                {1,0,0,0,0},
+                {0,1,0,0,0},
+                {0,0,1,0,0},
+                {0,0,0,1,0},
+                {0,0,0,0,1}
+        };
+
+        // 2x3 Pattern
+        int[][] sample4 = {
+                {1,0,1},
+                {1,1,1}
+        };
+
+        // 10x10 Blinker
+        int[][] sample5 = {
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,1,1,1,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0}
+        };
+
+        // 9x9 Full Border
+        int[][] sample6 ={
+                {1,1,1,1,1,1,1,1,1},
+                {1,0,0,0,0,0,0,0,1},
+                {1,0,0,0,0,0,0,0,1},
+                {1,0,0,0,0,0,0,0,1},
+                {1,0,0,0,0,0,0,0,1},
+                {1,0,0,0,0,0,0,0,1},
+                {1,0,0,0,0,0,0,0,1},
+                {1,0,0,0,0,0,0,0,1},
+                {1,1,1,1,1,1,1,1,1}
+        };
+        return sample6;
+    }//end getSampleGrid
+
+    public static int[][] getGliderGun(){
+
+           int[][] gliderGun = {
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0},
+                {0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
+
+            };
+
+        return gliderGun;
+    }//end getGliderGun
+
+    public static int[][] getSpaceship(){
+        int[][] spaceship = {
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,1,0,0,1,0,0,0},
+                {0,0,0,0,0,0,1,0,0},
+                {0,0,1,0,0,0,1,0,0},
+                {0,0,0,1,1,1,1,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+        };
+
+        return spaceship;
+    }//end getSpaceship
+
+}//end class Driver

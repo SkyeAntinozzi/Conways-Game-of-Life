@@ -1,0 +1,69 @@
+public class Driver {
+
+    public static void main(String[] args) {
+
+        // Dimensions of a 3x3 visible grid
+        int rows = 3;
+        int columns = 3;
+
+        // A 3x3 visible grid with a
+        // 23x23 full grid
+        CellGrid grid = new CellGrid(rows, columns);
+
+        // Seed the grid with a sample grid
+        grid.setVisibleGrid(getSampleGrid());
+
+        System.out.println(grid.getVisibleGridString());
+        System.out.println(grid.getFullGridString());
+        System.out.println(grid.getLabeledGridString());
+    }//end main
+
+    public static int[][] getSampleGrid(){
+        // 3x3 Blinker
+        int[][] sample1 = {
+                {0,1,0},
+                {0,1,0},
+                {0,1,0}
+        };
+
+
+        // 3x3 Glider
+        int[][] sample2 = {
+                {1,0,0},
+                {0,1,1},
+                {1,1,0}
+        };
+
+        // 5x5 Pattern
+        int[][] sample3 = {
+                {1,0,0,0,0},
+                {0,1,0,0,0},
+                {0,0,1,0,0},
+                {0,0,0,1,0},
+                {0,0,0,0,1}
+        };
+
+        // 2x3 Pattern
+        int[][] sample4 = {
+                {1,0,1},
+                {1,1,1}
+        };
+
+        // 10x10 Blinker
+        int[][] sample5 = {
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,1,1,1,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0}
+        };
+        return sample2;
+    }//end getSampleGrid
+
+}//end class Driver
+

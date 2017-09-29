@@ -1,0 +1,176 @@
+public class Driver {
+
+    public static void main(String[] args) {
+
+        // Dimensions of a 3x3 visible grid
+        int rows = 3;
+        int columns = 3;
+
+        // A 3x3 visible grid with a
+        // 23x23 full grid
+        CellGrid grid = new CellGrid(rows, columns);
+
+        // Seed the grid with a sample grid
+        grid.setVisibleGrid(getSampleGrid());
+
+        // Display all forms of the grid
+        grid.displayFullLabeledGrid();
+        grid.displayFullGrid();
+        grid.displayVisibleGrid();
+
+        // And display the cell statistics
+        System.out.println(grid);
+
+        // Row and columns for the full grid
+        int totalRows = grid.getTotalRows();
+        int totalColumns = grid.getTotalColumns();
+
+        // Space between grid stats and existential grid
+        System.out.println();
+
+        System.out.println("Full Cell Exists Test");
+        // Ensure that all cells that are actually within the full grid exist
+        for(int i = 0; i < totalRows; i++) {
+            for (int j = 0; j < totalColumns; j++)
+                System.out.print((grid.fullCellExists(i, j) ? 'T' : 'F') + " ");
+            System.out.println();
+        }
+
+        // Test above top border - These should all return false
+        // Row stays the same while Column increments
+        // 1 1 1 1 1
+        // 0 0 0 0 0
+        // 0 0 0 0 0
+        // 0 0 0 0 0
+        // 0 0 0 0 0
+        // 0 0 0 0 0
+        System.out.println("Top Border Test");
+        for(int j = 0; j < columns; j++)
+            System.out.print((grid.visibleCellExists(-1, j) ? "T" : "F") + " ");
+
+        // Space between tests
+        System.out.println();
+
+        // Test below bottom border - These should all return false
+        // Row stays the same while Column increments
+        // 0 0 0 0 0
+        // 0 0 0 0 0
+        // 0 0 0 0 0
+        // 0 0 0 0 0
+        // 0 0 0 0 0
+        // 1 1 1 1 1
+        System.out.println("Bottom Border Test");
+        for(int j = 0; j < columns; j++)
+            System.out.print((grid.visibleCellExists(5, j) ? "T" : "F") + " ");
+
+
+        // Space between tests
+        System.out.println();
+
+        // Test outside of left border - These should all return false
+        // Row increments while Column stays the same
+        // 1 0 0 0 0 0
+        // 1 0 0 0 0 0
+        // 1 0 0 0 0 0
+        // 1 0 0 0 0 0
+        // 1 0 0 0 0 0
+        System.out.println("Left Border Test");
+        for(int i = 0; i < rows; i++)
+            System.out.print((grid.visibleCellExists(i, -1) ? "T" : "F") + " ");
+
+        // Space between tests
+        System.out.println();
+
+
+        // Test outside of right border - These should all return false
+        // Row increments while Column stays the same
+        // 0 0 0 0 0 1
+        // 0 0 0 0 0 1
+        // 0 0 0 0 0 1
+        // 0 0 0 0 0 1
+        // 0 0 0 0 0 1
+        System.out.println("Right Border Test");
+        for(int i = 0; i < rows; i++)
+            System.out.print((grid.visibleCellExists(i, 5) ? "T" : "F") + " ");
+
+        // Space between tests
+        System.out.println('\n');
+
+        System.out.println("Grid and Border Test.");
+        // Previous tests all in one grid
+        for(int i = -1; i <= totalRows; i++) {
+            for (int j = -1; j <= totalColumns; j++)
+                System.out.print((grid.fullCellExists(i, j) ? 'T' : 'F') + " ");
+            System.out.println();
+        }
+
+
+        // Now test the visibleCellExists method
+        System.out.println("Visible Cell Exists Test");
+
+        // Check that all the cells that should exist within the visible grid actually exist
+        for(int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++)
+                System.out.print((grid.visibleCellExists(i, j) ? 'T' : 'F') + " ");
+            System.out.println();
+        }
+
+        System.out.println("Visible Cell Border Exists Test");
+        // Check that all the cells that should exist within the visible grid actually exist
+        // and the border cells do not exist
+        for(int i = -1; i <= rows; i++) {
+            for (int j = -1; j <= columns; j++)
+                System.out.print((grid.visibleCellExists(i, j) ? 'T' : 'F') + " ");
+            System.out.println();
+        }
+
+
+    }//end main
+
+    public static int[][] getSampleGrid(){
+        // 3x3 Blinker
+        int[][] sample1 = {
+                          {0,1,0},
+                          {0,1,0},
+                          {0,1,0}
+                                    };
+
+        // 3x3 Glider
+        int[][] sample2 = {
+                            {1,0,0},
+                            {0,1,0},
+                            {1,1,0}
+                                    };
+
+        // 5x5 Pattern
+        int[][] sample3 = {
+                           {1,0,0,0,0},
+                           {0,1,0,0,0},
+                           {0,0,1,0,0},
+                           {0,0,0,1,0},
+                           {0,0,0,0,1}
+                                     };
+
+        // 2x3 Pattern
+        int[][] sample4 = {
+                            {1,0,1},
+                            {1,1,1}
+                                    };
+
+        // 10x10 Blinker
+        int[][] sample5 = {
+                            {0,0,0,0,0,0,0,0,0,0},
+                            {0,0,0,0,0,0,0,0,0,0},
+                            {0,0,0,0,0,0,0,0,0,0},
+                            {0,0,0,0,0,0,0,0,0,0},
+                            {0,0,0,0,1,1,1,0,0,0},
+                            {0,0,0,0,0,0,0,0,0,0},
+                            {0,0,0,0,0,0,0,0,0,0},
+                            {0,0,0,0,0,0,0,0,0,0},
+                            {0,0,0,0,0,0,0,0,0,0},
+                            {0,0,0,0,0,0,0,0,0,0}
+                                                    };
+        return sample1;
+    }//end getSampleGrid
+
+}//end class Driver

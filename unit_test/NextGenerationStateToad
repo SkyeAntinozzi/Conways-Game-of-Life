@@ -1,0 +1,118 @@
+public class Driver {
+
+    public static void main(String[] args) {
+
+        // Dimensions of a 3x3 visible grid
+        int rows = 4;
+        int columns = 4;
+
+        // A 3x3 visible grid with a
+        // 23x23 full grid
+        CellGrid grid = new CellGrid(rows, columns);
+
+        // Seed the grid with a sample grid
+        grid.setVisibleGrid(getSampleGrid());
+
+        // Display all forms of the grid
+        grid.displayFullLabeledGrid();
+        grid.displayFullGrid();
+        grid.displayVisibleGrid();
+
+        // And display the cell statistics
+        System.out.println(grid);
+
+        // Get each cell from the visible grid and store them in an array
+        Cell[][] cells1 = new Cell[rows][columns];
+        for(int i = 0; i < rows; i++)
+            for(int j = 0; j < rows; j++)
+                cells1[i][j] = grid.getVisibleCell(i,j);
+
+        // Space between Cell stats and grid
+        System.out.println();
+
+        System.out.println("Does this match the original? It should.");
+        // Output this array to make sure it matches the original
+        for(int i = 0; i < rows; i++) {
+            for (int j = 0; j < rows; j++)
+                System.out.print(cells1[i][j] + " ");
+            System.out.println();
+        }
+
+        // Space between the grids
+        System.out.println();
+
+        System.out.println("Does this represent the next generation state of the previous pattern? It should.");
+        // Call next gen state for each Cell and determine whether
+        // the output is correct or not
+        for(int i = 0; i < rows; i++) {
+            for (int j = 0; j < rows; j++)
+                System.out.print((cells1[i][j].nextGenState() ? '1' : '0') + " ");
+            System.out.println();
+        }
+
+    }//end main
+
+    public static int[][] getSampleGrid(){
+        // 3x3 Blinker
+        int[][] sample1 = {
+                {0,1,0},
+                {0,1,0},
+                {0,1,0}
+        };
+
+        // 3x3 Glider
+        int[][] sample2 = {
+                {1,0,0},
+                {0,1,1},
+                {1,1,0}
+        };
+
+        // 5x5 Pattern
+        int[][] sample3 = {
+                {1,0,0,0,0},
+                {0,1,0,0,0},
+                {0,0,1,0,0},
+                {0,0,0,1,0},
+                {0,0,0,0,1}
+        };
+
+        // 2x3 Pattern
+        int[][] sample4 = {
+                {1,0,1},
+                {1,1,1}
+        };
+
+        // 10x10 Blinker
+        int[][] sample5 = {
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,1,1,1,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0}
+        };
+
+        // 4x4 Toad - Phase 1
+        int[][] sample6 = {
+            {0,0,0,0},
+            {0,1,1,1},
+            {1,1,1,0},
+            {0,0,0,0}
+        };
+
+        // 4x4 Toad - Phase 2
+        int[][] sample7 = {
+                {0,0,1,0},
+                {1,0,0,1},
+                {1,0,0,1},
+                {0,1,0,0}
+        };
+
+        return sample7;
+    }//end getSampleGrid
+
+}//end class Driver

@@ -1,0 +1,94 @@
+public class Driver {
+
+    public static void main(String[] args) {
+
+        // Evolution loop status
+        boolean running = true;
+
+        // Input from user. Either enter to continue or 'q' to quit out
+        int input = ' ';
+
+        // Dimensions of a 3x3 visible grid
+        int rows = 3;
+        int columns = 3;
+
+        // A 3x3 visible grid with a
+        // 23x23 full grid
+        CellGrid grid = new CellGrid(rows, columns);
+
+        // Seed the grid with a sample grid
+        grid.setVisibleGrid(getSampleGrid());
+
+        // Display all forms of the grid
+        System.out.println(grid.getFullGridString());
+        System.out.println(grid.getVisibleGridString());
+
+        // And display the cell statistics
+        System.out.println(grid);
+
+        // While evolving
+        while(running){
+            System.out.println("Enter to Evolve or 'q' to quit");
+
+            // Block for input
+            try{ input = System.in.read(); System.in.skip(2); } catch(Exception ex){System.err.println("read() error");}
+
+            // If the input was q then quit out by setting running = false
+            if(input == 'q')
+                running = false;
+                // Otherwise go evolve
+            else {
+                grid.evolve();
+                System.out.println(grid.getFullGridString());
+                System.out.println(grid.getVisibleGridString());
+            }
+        }//end while
+    }//end main
+
+    public static int[][] getSampleGrid(){
+        // 3x3 Blinker
+        int[][] sample1 = {
+                {0,1,0},
+                {0,1,0},
+                {0,1,0}
+        };
+
+        // 3x3 Glider
+        int[][] sample2 = {
+                {1,0,0},
+                {0,1,1},
+                {1,1,0}
+        };
+
+        // 5x5 Pattern
+        int[][] sample3 = {
+                {1,0,0,0,0},
+                {0,1,0,0,0},
+                {0,0,1,0,0},
+                {0,0,0,1,0},
+                {0,0,0,0,1}
+        };
+
+        // 2x3 Pattern
+        int[][] sample4 = {
+                {1,0,1},
+                {1,1,1}
+        };
+
+        // 10x10 Blinker
+        int[][] sample5 = {
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,1,1,1,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0}
+        };
+        return sample1;
+    }//end getSampleGrid
+
+}//end class Driver

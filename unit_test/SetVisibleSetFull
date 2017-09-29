@@ -1,0 +1,109 @@
+public class Driver {
+
+    public static void main(String[] args) {
+
+        // Dimensions of a 3x3 visible grid
+        int rows = 3;
+        int columns = 3;
+
+        // A 3x3 visible grid with a
+        // 23x23 full grid
+        CellGrid grid = new CellGrid(rows, columns);
+
+        // Display the cell statistics
+        System.out.println(grid);
+
+        System.out.println("Test setVisibleGrid");
+
+        // Seed the grid with blinker phase 1
+        grid.setVisibleGrid(getBlinkerPhase1());
+
+        // Display visible grid
+        System.out.println(grid.getFullGridString());
+
+        // Seed the grid with blinker phase 2
+        grid.setVisibleGrid(getBlinkerPhase2());
+
+        // Display visible grid
+        System.out.println(grid.getFullGridString());
+
+
+
+        System.out.println("Test setFullGrid");
+
+
+        // Seed the grid with blinker phase 1
+        grid.setFullGrid(getSampleGrid());
+
+        // Display the full grid
+        System.out.println(grid.getFullGridString());
+
+    }//end main
+
+    public static int[][] getSampleGrid(){
+        // 3x3 Blinker
+        int[][] sample1 = {
+                {0,1,0},
+                {0,1,0},
+                {0,1,0}
+        };
+
+        // 3x3 Glider
+        int[][] sample2 = {
+                {1,0,0},
+                {0,1,0},
+                {1,1,0}
+        };
+
+        // 5x5 Pattern
+        int[][] sample3 = {
+                {1,0,0,0,0},
+                {0,1,0,0,0},
+                {0,0,1,0,0},
+                {0,0,0,1,0},
+                {0,0,0,0,1}
+        };
+
+        // 2x3 Pattern
+        int[][] sample4 = {
+                {1,0,1},
+                {1,1,1}
+        };
+
+        // 10x10 Blinker
+        int[][] sample5 = {
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,1,1,1,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0}
+        };
+        return sample3;
+    }//end getSampleGrid
+
+    public static int[][] getBlinkerPhase1(){
+        // 3x3 Blinker Phase 1
+        int[][] sample1 = {
+                {0,1,0},
+                {0,1,0},
+                {0,1,0}
+        };
+        return sample1;
+    }//end getBlinkerPhase1
+
+    public static int[][] getBlinkerPhase2(){
+        // 3x3 Blinker Phase 2
+        int[][] sample1 = {
+                {0,0,0},
+                {1,1,1},
+                {0,0,0}
+        };
+        return sample1;
+    }//end getBlinkerPhase2
+
+}//end class Driver

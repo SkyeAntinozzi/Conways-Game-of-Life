@@ -1,0 +1,57 @@
+public class Driver {
+
+    public static void main(String[] args) {
+        // 3x3 visible grid
+        int rows = 2;
+        int columns = 3;
+
+        // A 3x3 grid with empty Cells
+        // Which is really a 5x5
+        CellGrid grid = new CellGrid(rows, columns);
+
+        // Display the visible grid with all Cells as 0's (not filled)
+        grid.displayVisibleGrid();
+
+        // Display the total grid with all Cells as 0's (not filled)
+        grid.displayFullGrid();
+
+        // Setup the sample grid
+        grid.setGrid(getSampleGrid());
+
+        // Display the visible grid which now holds a pattern
+        grid.displayVisibleGrid();
+
+        // Display the entire grid which now holds a pattern
+        grid.displayFullGrid();
+
+        // Output grid stats
+        System.out.println(grid);
+
+        // Iterate through grid and print out visibility status
+        for(int i = 0; i < grid.getTotalRows(); i++ ){
+            for(int j = 0; j < grid.getTotalColumns(); j++)
+                System.out.print((grid.cellAt(i,j).visible() ? 'V' : 'H') + " ");
+            System.out.println();
+        }
+    }
+
+    public static int[][] getSampleGrid(){
+        int[][] sample1 = {{0,1,0},
+                          {0,1,0},
+                          {0,1,0}};
+
+        int[][] sample2 = {{1,0,0},
+                {0,1,0},
+                {1,1,0}};
+
+        int[][] sample3 = {{1,0,0,0,0},
+                           {0,1,0,0,0},
+                           {0,0,1,0,0},
+                           {0,0,0,1,0},
+                           {0,0,0,0,1}};
+
+        int[][] sample4 = {{1,0,1},
+                           {1,1,1}};
+        return sample4;
+    }//end getSampleGrid
+}//end class Driver

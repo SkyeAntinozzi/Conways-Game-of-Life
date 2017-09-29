@@ -1,0 +1,94 @@
+public class Driver {
+
+    public static void main(String[] args) {
+
+        // Evolution loop status
+        boolean running = true;
+
+        // Input from user. Either enter to continue or 'q' to quit out
+        int input = ' ';
+
+        // Dimensions of a 3x3 visible grid
+        int rows = 3;
+        int columns = 3;
+
+        // A 3x3 visible grid with a
+        // 23x23 full grid
+        CellGrid grid = new CellGrid(rows, columns);
+
+        // Check the Grid Stats
+        System.out.println(grid);
+
+        // Set the grid up as a fully filled border
+        grid.setFullGrid(getSampleGrid());
+
+        // See that the grid is setup correctly
+        System.out.println(grid.getFullGridString());
+
+        // Check the border
+        System.out.println("Cell(s) on border? " + grid.filledCellOnBorder());
+
+        if(grid.filledCellOnBorder())
+            grid.clearBorder();
+    }//end main
+
+    public static int[][] getSampleGrid(){
+        // 3x3 Blinker
+        int[][] sample1 = {
+                {0,1,0},
+                {0,1,0},
+                {0,1,0}
+        };
+
+        // 3x3 Glider
+        int[][] sample2 = {
+                {1,0,0},
+                {0,1,1},
+                {1,1,0}
+        };
+
+        // 5x5 Pattern
+        int[][] sample3 = {
+                {1,0,0,0,0},
+                {0,1,0,0,0},
+                {0,0,1,0,0},
+                {0,0,0,1,0},
+                {0,0,0,0,1}
+        };
+
+        // 2x3 Pattern
+        int[][] sample4 = {
+                {1,0,1},
+                {1,1,1}
+        };
+
+        // 10x10 Blinker
+        int[][] sample5 = {
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,1,1,1,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0}
+        };
+
+        // 9x9 Full Border
+        int[][] sample6 ={
+                {1,1,1,1,1,1,1,1,1},
+                {1,0,0,0,0,0,0,0,1},
+                {1,0,0,0,0,0,0,0,1},
+                {1,0,0,0,0,0,0,0,1},
+                {1,0,0,0,0,0,0,0,1},
+                {1,0,0,0,0,0,0,0,1},
+                {1,0,0,0,0,0,0,0,1},
+                {1,0,0,0,0,0,0,0,1},
+                {1,1,1,1,1,1,1,1,1}
+        };
+        return sample6;
+    }//end getSampleGrid
+
+}//end class Driver
